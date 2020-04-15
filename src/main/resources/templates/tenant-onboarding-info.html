@@ -1,0 +1,387 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>iPG Tenant Onboarding: success</title>
+</head>
+<body style="margin:0;">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" align="center"
+       style="border-collapse:collapse; max-width: 640px; border: 1px solid #dfdfdf; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: 0.5px; color: #404040;">
+  <tr>
+    <td valign="middle">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#fff"
+             style="border-collapse:collapse;">
+        <tr>
+          <td align="left" valign="middle" bgcolor="#0073cf" style="padding:20px 5px 20px 0px;">
+            <div  style="font-size: 30px; font-weight: 1000;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: white; padding-left: 30px; "> iPGApp</div>
+          </td>
+          <td align="right" valign="middle" bgcolor="#0073cf" style="padding:20px 20px 20px 5px;">
+            <a href="javascript:void(0)"
+               style="color:#fff; text-decoration:none; cursor: text; display: block; margin-bottom: 3px;"><span data-th-text="${name}"></span></a>
+            <a href="#"
+               style="color:rgb(255,255,255); text-decoration:none; cursor: text; display: block;"><span data-th-text="${phoneNumber}"></span></a>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top" bgcolor="#0073cf" style="padding:0 20px;">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0"
+             style="border: 1px solid #dfdfdf; border-bottom: 0; border-top-left-radius: 4px; border-top-right-radius: 4px; background: #fff;">
+        <tr>
+          <td align="left" valign="middle" style="padding:7px 6px;">
+		     </td>
+          <td align="left" valign="middle" style="font-weight: bold; padding:20px 20px 20px 0px">
+            <h3 style="margin:0 0 3px 0; color: #1abc9c;">Successful Onboarding with <b><span data-th-text="${hostelName}"></span></b>!</h3>
+            <h1 style="margin:0;">&#8377; <span data-th-text="${rentAmount}"></span></h1>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top" style="padding:0 20px;">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#fff"
+             style="border: 1px solid #dfdfdf; border-top: 0; border-bottom-left-radius: 4px; border-bottom-right-radius: 4px;">
+        <tr>
+          <td align="left" valign="top" style="padding:0px 20px 20px;">
+            <p style="margin:0; padding-top:20px; line-height: 1.2; border-top: 1px solid #eaebed;">
+             <strong> &#8377; <span data-th-text="${advanceAmount}"></span></strong> paid as an advance successfully by 
+               <strong><span data-th-text="${rentMethod}"></span></strong>, payment type: <strong><span data-th-text="${rentType}"></span></strong> </p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top" style="padding: 30px 20px;">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#fff"
+             style="border-collapse:collapse;">
+        <tr>
+          <td align="left" valign="top" colspan="2" style="padding-bottom: 10px;"><h3
+              style="margin:0;">Your PG Details</h3></td>
+        </tr>
+        <tr>
+          <td align="left" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+           Hostel Id
+          </td>
+          <td align="right" valign="top"
+              style="padding: 10px 0 10px 5px; border-bottom: 1px solid #eaebed; color: #404040; font-weight: bold;">
+            <span data-th-text="${hostelId}"></span>
+          </td>
+        </tr>
+        <tr>
+          <td align="left" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+           Hostel Name
+          </td>
+          <td align="right" valign="top"
+              style="padding: 10px 0 10px 5px; border-bottom: 1px solid #eaebed; color: #404040; font-weight: bold;">
+           <span data-th-text="${hostelName}"></span>
+          </td>
+        </tr>
+        <tr>
+          <td align="left" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+          Floor
+          </td>
+          <td align="right" valign="top"
+              style="padding: 10px 0 10px 5px; border-bottom: 1px solid #eaebed; color: #404040; font-weight: bold;">
+            <span data-th-text="${floor}"></span>
+          </td>
+        </tr>
+        <tr>
+          <td align="left" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+          Room Number
+          </td>
+          <td align="right" valign="top"
+              style="padding: 10px 0 10px 5px; border-bottom: 1px solid #eaebed; color: #404040; font-weight: bold;">
+           <span data-th-text="${roomNumber}"></span>
+          </td>
+        </tr>
+        <tr>
+          <td align="left" valign="top" style="padding: 10px 5px 10px 0;border-bottom: 1px solid #eaebed; color: #808080;">
+           Bed Number
+          </td>
+          <td align="right" valign="top"
+              style="padding: 10px 0 10px 5px; color: #404040; border-bottom: 1px solid #eaebed; font-weight: bold;"><span data-th-text="${bedNumber}"></span>
+          </td>
+        </tr>
+		
+		  <tr>
+          <td align="left" valign="top" style="padding: 10px 5px 10px 0;border-bottom: 1px solid #eaebed; color: #808080;">
+         Sharing Type
+          </td>
+          <td align="right" valign="top"
+              style="padding: 10px 0 10px 5px; color: #404040;  border-bottom: 1px solid #eaebed; font-weight: bold;"><span data-th-text="${sharingType}"></span>
+          </td>
+        </tr>
+		
+		 <tr>
+          <td align="left" valign="top" style="padding: 10px 5px 10px 0;border-bottom: 1px solid #eaebed; color: #808080;">
+        Date of Booking
+          </td>
+          <td align="right" valign="top"
+              style="padding: 10px 0 10px 5px; color: #404040;border-bottom: 1px solid #eaebed; font-weight: bold;"><span data-th-text="${bookedDate}"></span>
+          </td>
+        </tr>
+         
+      </table>
+    </td>
+  </tr>
+  
+  <tr>
+    <td valign="top" style="padding: 2px 20px;">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#fff"
+             style="border-collapse:collapse;">
+        <tr>
+          <td align="left" valign="top" colspan="2" style="padding-bottom: 10px;"><h3
+              style="margin:0;">Your Details</h3></td>
+        </tr>
+        <tr>
+          <td align="left" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+            Name
+          </td>
+          <td align="right" valign="top"
+              style="padding: 10px 0 10px 5px; border-bottom: 1px solid #eaebed; color: #404040; font-weight: bold;">
+            <span data-th-text="${name}"></span>
+          </td>
+        </tr>
+		
+		<tr>
+          <td align="left" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+            Mobile Number
+          </td>
+          <td align="right" valign="top"
+              style="padding: 10px 0 10px 5px; border-bottom: 1px solid #eaebed; color: #404040; font-weight: bold;">
+            <span data-th-text="${phoneNumber}"></span>
+          </td>
+        </tr>
+		
+		<tr>
+          <td align="left" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+            Email
+          </td>
+          <td align="right" valign="top"
+              style="padding: 10px 0 10px 5px; border-bottom: 1px solid #eaebed; color: #404040; font-weight: bold;">
+            <span data-th-text="${email}"></span>
+          </td>
+        </tr>
+		
+		<tr>
+          <td align="left" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+            AADHAR
+          </td>
+          <td align="right" valign="top"
+              style="padding: 10px 0 10px 5px; border-bottom: 1px solid #eaebed; color: #404040; font-weight: bold;">
+            <span data-th-text="${aadhar}"></span>
+          </td>
+        </tr>
+		
+		
+		
+		 <tr>
+          <td align="left" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+            Address
+          </td>
+          <td align="right" valign="top"
+              style="padding: 10px 0 10px 5px; border-bottom: 1px solid #eaebed; color: #404040; font-weight: bold;">
+            <span data-th-text="${address_line1}"></span> <br /> <span data-th-text="${address_line2}"></span>
+          </td>
+        </tr>
+		        
+		        <tr>
+          <td align="left" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+            City
+          </td>
+          <td align="right" valign="top"
+              style="padding: 10px 0 10px 5px; border-bottom: 1px solid #eaebed; color: #404040; font-weight: bold;">
+            <span data-th-text="${city}"></span>
+          </td>
+        </tr>
+		        <tr>
+          <td align="left" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+            State
+          </td>
+          <td align="right" valign="top"
+              style="padding: 10px 0 10px 5px; border-bottom: 1px solid #eaebed; color: #404040; font-weight: bold;">
+            <span data-th-text="${state}"></span>
+          </td>
+        </tr>
+		        <tr>
+          <td align="left" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+            ZipCode
+          </td>
+          <td align="right" valign="top"
+              style="padding: 10px 0 10px 5px; border-bottom: 1px solid #eaebed; color: #404040; font-weight: bold;">
+            <span data-th-text="${zipcode}"></span>
+          </td>
+        </tr>
+		
+		        <tr>
+          <td align="left" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+            Emergency Contanct
+          </td>
+          <td align="right" valign="top"
+              style="padding: 10px 0 10px 5px; border-bottom: 1px solid #eaebed; color: #404040; font-weight: bold;">
+            <span data-th-text="${emergency}"></span>
+          </td>
+        </tr>
+		
+		  <tr>
+          <td align="left" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+            Gender
+          </td>
+          <td align="right" valign="top"
+              style="padding: 10px 0 10px 5px; border-bottom: 1px solid #eaebed; color: #404040; font-weight: bold;">
+            <span data-th-text="${gender}"></span>
+          </td>
+        </tr>
+		
+		 <tr>
+          <td align="left" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+            eSignature
+          </td>
+          <td align="right" valign="top"
+              style="padding: 10px 0 10px 5px; border-bottom: 1px solid #eaebed; color: #404040; font-weight: bold;">
+            <span data-th-text="${eSignature}"></span>
+          </td>
+        </tr>
+		        <tr>
+          <td align="left" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+            Date
+          </td>
+          <td align="right" valign="top"
+              style="padding: 10px 0 10px 5px; border-bottom: 1px solid #eaebed; color: #404040; font-weight: bold;">
+            <span data-th-text="${date}"></span>
+          </td>
+		  </tr>
+		  
+		  <tr>
+          <td align="left" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+            Comments
+          </td>
+          <td align="right" valign="top"
+              style="padding: 10px 0 10px 5px; border-bottom: 1px solid #eaebed; color: #404040; font-weight: bold;">
+            <span data-th-text="${desc}"></span>
+          </td>
+        </tr> </table>
+		</td>
+		</tr>
+		
+		
+<tr>
+    <td valign="top" style="padding: 30px 20px;">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#fff"
+             style="border-collapse:collapse;">
+			 
+        <tr>
+          <td align="left" valign="top" colspan="2" style="padding-bottom: 10px;"><h3
+              style="margin:0;">Your Login Details</h3></td>
+        </tr>
+        <tr>
+          <td align="left" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+           User ID
+          </td>
+          <td align="right" valign="top"
+              style="padding: 10px 0 10px 5px; border-bottom: 1px solid #eaebed; color: #404040; font-weight: bold;">
+            <span data-th-text="${phoneNumber}"></span>
+          </td>
+        </tr>
+        <tr>
+          <td align="left" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+           Temp Password
+          </td>
+          <td align="right" valign="top"
+              style="padding: 10px 0 10px 5px; border-bottom: 1px solid #eaebed; color: #404040; font-weight: bold;">
+           <span data-th-text="${password}"></span>
+          </td>
+        </tr>
+		
+		<tr>
+	  <td align="left" valign="top" colspan="2" style="padding-top: 15px;">
+		<table width="100%" bgcolor="#eaebed" cellpadding="0" cellspacing="0" border="0"
+			   style="padding: 20px 20px 15px 20px; border-radius: 4px;">
+		  <tr>
+			<td align="left" valign="top"
+				style="color: #404040; font-weight: bold; padding-bottom: 5px;">Total Monthly Payment
+			</td>
+			<td align="right" valign="top"
+				style="color: #404040; font-weight: bold; padding-bottom: 5px;"> <strong>&#8377; <span data-th-text="${rentAmount}"></span></strong>
+			</td>
+		  </tr>
+		   
+		</table>
+	  </td>
+	</tr>
+		
+		</table>
+		</td>
+        
+  </tr>
+         
+        
+	
+ <!--     </table>
+    </td>
+  </tr> ->>
+  
+  
+  
+  <!-- <tr>
+      <td align="center" valign="middle" style="padding: 10px 20px 20px;"><a href="" target="_blank" style="display: inline-block; padding: 15px 25px; border: 1px solid #0073cf; border-radius: 4px; text-decoration: none; color: #0073cf; min-width: 100px;">Download Invoice</a></td>
+  </tr> -->
+  <tr>
+    <td align="left" valign="middle" style="padding:20px;">
+      <p style="margin:0; color: #808080; font-weight: normal;">*
+        <small>This email is kind of tenant onboarding confirmation with PG <b><span data-th-text="${hostelName}"></span></b>. If you notice any incorrect details in this email then request you to immediately contact <b><span data-th-text="${hostelName}"></span></b> management/admin to address to correct the issues ASAP. You are requested to contact our <strong>iPG</strong> services for any system related issues by repliying to this email.
+        </small>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="middle" style="padding: 20px 20px 30px;">
+      <p style="margin:0; padding: 20px 0; border-top: 1px solid #eaebed; border-bottom: 1px solid #eaebed;">
+        Reach out to us at <a href="https://ipgapp.in" target="_blank"
+                              style="text-decoration: none; color: #0073cf;">iPG Customer Care</a> for any issues. <a href="https://www.ipgapp.in/help" target="_blank" style="color: #0073cf;">HELP</a>
+      </p>
+    </td>
+  </tr>
+   
+  <tr>
+    <td style="font-size:11px;color:#666; padding:0 20px 20px;">
+      <strong>Disclaimer :</strong> Beware of Fake Videos, Messages & Calls claiming to be from
+      iPGApp. Never share your password, Credit/Debit card PIN, CVV or any confidential
+      information since iPGApp will never seek such information.
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="middle" bgcolor="#eaebed" style="padding: 25px 20px;">
+      <a href="play.google.com"
+         target="_blank"
+         style="display: inline-block; margin-bottom: 15px; padding: 15px 25px; border-radius: 4px; text-decoration: none; color: #fff; background: #0073cf;">Download
+        iPGApp </a>
+      <p style="margin:0; color: #808080; font-size: 14px;">&copy; 2020, iPGApp. All rights reserved.</p>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

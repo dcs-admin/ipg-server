@@ -1,0 +1,173 @@
+<!doctype html>
+<html >
+<head>
+  <meta charset="utf-8">
+  <title>iPG Tenant Payment</title>
+</head>
+<body style="margin:0;">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" align="center"
+       style="border-collapse:collapse; max-width: 640px; border: 1px solid #dfdfdf; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: 0.5px; color: #404040;">
+  <tr>
+    <td valign="middle">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#fff"
+             style="border-collapse:collapse;">
+        <tr>
+          <td align="left" valign="middle" bgcolor="#0073cf" style="padding:20px 5px 20px 0px;">
+            <div  style="font-size: 30px; font-weight: 1000;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: white; padding-left: 30px; "> iPGApp</div>
+          </td>
+          <td align="right" valign="middle" bgcolor="#0073cf" style="padding:20px 20px 20px 5px;">
+            <a href="javascript:void(0)"
+               style="color:#fff; text-decoration:none; cursor: text; display: block; margin-bottom: 3px;"><span data-th-text="${name}"></span></a>
+			    <a href="#"
+               style="color:rgb(255,255,255); text-decoration:none; cursor: text; display: block;"><span data-th-text="${mobileNumber}"></span></a>
+			   
+            <a href="#"
+               style="color:rgb(255,255,255); text-decoration:none; cursor: text; display: block;"><span data-th-text="${email}"></span></a>
+			  
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top" bgcolor="#0073cf" style="padding:0 20px;">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0"
+             style="border: 1px solid #dfdfdf; border-bottom: 0; border-top-left-radius: 4px; border-top-right-radius: 4px; background: #fff;">
+        <tr>
+          <td align="left" valign="middle" style="padding:7px 6px;">
+		     </td>
+          <td align="left" valign="middle" style="font-weight: bold; padding:20px 20px 20px 0px">
+            <h3 style="margin:0 0 3px 0; color: #1abc9c;">
+			Payment Report for <span data-th-text="${month}"></span>,<span data-th-text="${year}"></span></h3>
+            <h1 style="margin:0;">&#8377;  <span data-th-text="${amount}"></span></h1>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top" style="padding:0 20px;">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#fff"
+             style="border: 1px solid #dfdfdf; border-top: 0; border-bottom-left-radius: 4px; border-bottom-right-radius: 4px;">
+        <tr>
+          <td align="left" valign="top" style="padding:0px 20px 20px;">
+            <p style="margin:0; padding-top:20px; line-height: 1.2; border-top: 1px solid #eaebed;">
+             Payments including Pending and actual from system 
+			</p>
+			  
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top" style="padding: 30px 20px;">
+	
+      <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#fff"
+             style="border-collapse:collapse;">
+        <tr>
+          <td align="left" valign="top" colspan="2" style="padding-bottom: 10px;"><h3
+              style="margin:0;">Total Payments</h3></td>
+        </tr>
+		<tr data-th:each="payment : ${payments}">
+          <th align="center" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+         Name
+		 </th>
+		  <th align="center" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+         Method
+		 </th>
+		 <th align="center" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+         Date
+		 </th>
+		 <th align="center" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+         Pending
+		 </th>
+		 <th align="center" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+         Amount
+		 </th>
+          
+        </tr>
+		 
+	   
+        <tr th:each="payment : ${payments}">
+          <td align="left" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+         <span th:text="${payment.tName}"></span>
+          </td>
+		  <td align="left" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+         <span th:text="${payment.rentMethod}" ></span>
+          </td>
+		  <td align="left" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+         <span th:text="${payment.paidDate}"></span>
+          </td>
+		  <td align="right" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+         &#8377;<span th:text="${payment.pendingAmount}"></span>
+          </td>
+          <td align="right" valign="top"
+              style="padding: 10px 0 10px 5px; border-bottom: 1px solid #eaebed; color: #404040; font-weight: bold;">
+            &#8377;<span th:text="${payment.amount}"></span>
+          </td>
+        </tr>
+		  
+		
+		
+			<tr>
+	  <td align="left" valign="top" colspan="5" style="padding-top: 15px;">
+		<table width="100%" bgcolor="#eaebed" cellpadding="0" cellspacing="0" border="0"
+			   style="padding: 20px 20px 15px 20px; border-radius: 4px;">
+		  <tr>
+			<td align="left" valign="top"  
+				style="color: #404040; font-weight: bold; padding-bottom: 5px;">Total Amount Recieved
+			</td>
+
+			<td align="right" valign="top"
+				style="color: #404040; font-weight: bold; padding-bottom: 5px;">&#8377; <strong> <span data-th-text="${amount}"></span></strong>
+			</td>
+		  </tr>
+		   
+		</table>
+	  </td>
+	</tr>
+         
+      </table>
+    </td>
+  </tr>
+    
+   
+  
+  <tr>
+    <td align="center" valign="middle" style="padding: 20px 20px 30px;">
+      <p style="margin:0; padding: 20px 0; border-top: 1px solid #eaebed; border-bottom: 1px solid #eaebed;">
+        Reach out to us at <a href="https://ipgapp.in" target="_blank"
+                              style="text-decoration: none; color: #0073cf;">iPG Customer Care</a> for any issues. <a href="https://www.ipgapp.in/help" target="_blank" style="color: #0073cf;">HELP</a>
+      </p>
+    </td>
+  </tr>
+   
+  <tr>
+    <td style="font-size:11px;color:#666; padding:0 20px 20px;">
+      <strong>Disclaimer :</strong> Beware of Fake Videos, Messages & Calls claiming to be from
+      iPGApp. Never share your password, Credit/Debit card PIN, CVV or any confidential
+      information since iPGApp will never seek such information.
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="middle" bgcolor="#eaebed" style="padding: 25px 20px;">
+      <a href="play.google.com"
+         target="_blank"
+         style="display: inline-block; margin-bottom: 15px; padding: 15px 25px; border-radius: 4px; text-decoration: none; color: #fff; background: #0073cf;">Download
+        iPGApp </a>
+      <p style="margin:0; color: #808080; font-size: 14px;">&copy; 2020, iPGApp. All rights reserved.</p>
+    </td>
+  </tr>
+</table>
+</body>
+</html>
