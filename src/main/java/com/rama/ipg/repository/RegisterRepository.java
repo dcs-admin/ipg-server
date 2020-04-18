@@ -3,6 +3,7 @@ package com.rama.ipg.repository;
  
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.rama.ipg.model.Register;
@@ -10,7 +11,8 @@ import com.rama.ipg.model.Register;
 @Repository
 public interface RegisterRepository extends JpaRepository<Register, Long> {
 
-	 
+	@Query(value="SELECT t FROM Register t WHERE t.mobileNumber=?1 and t.password=?2") 
+	public Register getOwner(String tid, String pwd);
 	
 	
 	/*

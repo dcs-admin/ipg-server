@@ -32,7 +32,8 @@ public  class Register implements Serializable {
 	@Column  private Date  installationUpdateDate ;
 	@Column  private String  email ;
 	@Column  private String  amount ;
-	@Column  private String  otp ;
+	@Column  private String  otp ; 
+	@Column  private String  password ;
 	
 	public String getMobileNumber() {
 		return mobileNumber.trim() ;
@@ -114,6 +115,12 @@ public  class Register implements Serializable {
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	@Override
 	public String toString() {

@@ -25,10 +25,10 @@ public class Bed  implements Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column Long  id ;   
 	
-	@Column private  String  hostelId ; 
+	@Column private  long  hostelId ; 
 	@Column private  String  hostelName ;   
 	@Column private  String  floor   ;     
-	@Column private  String  roomId   ;     
+	@Column private  long  roomId   ;     
 	@Column private  String  roomNumber  ;  
 	@Column private  String  bedNumber    ; 
 	@Column private  String  sharingType ;  
@@ -38,18 +38,15 @@ public class Bed  implements Serializable{
 	@Column private  String  bookedDate ;   
 	@Column private  String  rent    ;      
 	@Column private String ownerId		;
+	
+	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getHostelId() {
-		return hostelId;
-	}
-	public void setHostelId(String hostelId) {
-		this.hostelId = hostelId;
-	}
+	 
 	public String getHostelName() {
 		return hostelName;
 	}
@@ -62,10 +59,17 @@ public class Bed  implements Serializable{
 	public void setFloor(String floor) {
 		this.floor = floor;
 	}
-	public String getRoomId() {
+	 
+	public long getHostelId() {
+		return hostelId;
+	}
+	public void setHostelId(long hostelId) {
+		this.hostelId = hostelId;
+	}
+	public long getRoomId() {
 		return roomId;
 	}
-	public void setRoomId(String roomId) {
+	public void setRoomId(long roomId) {
 		this.roomId = roomId;
 	}
 	public String getRoomNumber() {

@@ -41,8 +41,11 @@ public class IPGSmsGateway {
 	@Value("${ipg.sms.host-url:}")
 	private String hostUrl;
 	
+	public boolean sendSMS(String toMobileNumbers, String message ) {
+		return true;
+	}
 	
-	public boolean sendSMS(String toMobileNumbers, String message ) throws MailException, MessagingException, IOException, TemplateException {
+	public boolean sendSMSCommented(String toMobileNumbers, String message ) throws MailException, MessagingException, IOException, TemplateException {
     
 		logger.debug("In::"+toMobileNumbers+":"+message);
 		boolean sentStatus = false;

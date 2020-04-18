@@ -39,7 +39,7 @@ public class RegisterController {
 		
 		logger.info("IN::/register:"+register);
 		
-		 this.registerService.doRegister(register);
+		register = this.registerService.doRegister(register);
 		
 		register = registerRepository.save(register); 
 		

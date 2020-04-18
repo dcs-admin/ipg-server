@@ -33,6 +33,12 @@ public class SMSTemplates {
 			"Thanks\n"+
 			"--\n@Team iPG";
 	
+	public static final String SUPERVISOR_ONBOARDING_TEMPLATE = "Hello ##USER_NAME##, \n"+
+			"You are requested as supervisory operations with the request from  ##OWNER##.\n"+  
+			"Download app from playstore and login with temp password : ##PASSWORD##\n"+
+			"Thanks\n"+
+			"--\n@Team iPG";
+	
 	public static final String TENANT_PAYMENT_TEMPLATE = "Dear ##USER_NAME##, \n"+
 			"Payment received on : ##MONTH## to ##HOSTEL_NAME##.\n"+ 
 			"Amount Received : ##RENT##\n"+

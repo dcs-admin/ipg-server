@@ -4,6 +4,7 @@ package com.rama.ipg.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "hostel")
@@ -34,6 +36,29 @@ public  class Hostel implements Serializable {
 	@Column private String state 		;
 	@Column private String zipcode 		; 
 	@Column private Date date			;
+	@Column private Date updDate		; 
+	@Column private String ownerId		; 
+	
+	@Column private String supervisorId	;
+	 
+	
+	@Transient
+	private List<Room> rooms;
+	 
+
+	public String getSupervisorId() {
+		return supervisorId;
+	}
+	public void setSupervisorId(String supervisorId) {
+		this.supervisorId = supervisorId;
+	}
+	public List<Room> getRooms() {
+		return rooms;
+	}
+	public void setRooms(List<Room> rooms) {
+		this.rooms = rooms;
+	}
+	
 	public Date getDate() {
 		return date;
 	}
@@ -46,8 +71,7 @@ public  class Hostel implements Serializable {
 	public void setUpdDate(Date updDate) {
 		this.updDate = updDate;
 	}
-	@Column private Date updDate		; 
-	@Column private String ownerId		; 
+	
 	
 	//  private String photos		;
 	public Long getId() {

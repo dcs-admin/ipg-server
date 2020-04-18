@@ -23,7 +23,8 @@ import org.thymeleaf.context.Context;
 import com.rama.ipg.communication.IPGMailer;
 import com.rama.ipg.communication.IPGSmsGateway;
 import com.rama.ipg.constants.SMSTemplates;
-import com.rama.ipg.model.Register; 
+import com.rama.ipg.model.Register;
+import com.rama.ipg.util.PasswordGenerator;
 
 import freemarker.template.TemplateException;
 
@@ -47,15 +48,22 @@ public class RegisterService {
 	@Autowired
 	private TemplateEngine templateEngine; 
 	
+	@Autowired
+	private PasswordGenerator passwordGenerator;
+	
 	private Random rand = new Random(); 
 	
 	
 	
-	public void doRegister(Register register){
+	public Register doRegister(Register register){
 		
+		register.setPassword(passwordGenerator.generateRamdomPassword());
+			
 		 this.triggerAlertEmail(register);
 		 
 		 this.triggerSMS(register);
+		 
+		 return register;
 		
 		
 	}
@@ -173,6 +181,7 @@ public class RegisterService {
  		reqParamtersMap.put("name", register.getName()); 
  		reqParamtersMap.put("otp", register.getOtp()); 
  		reqParamtersMap.put("today_date", ""+new Date());
+ 		reqParamtersMap.put("password", register.getPassword());
  		
  		
 		String output = this.templateEngine.process(templateFileName,
