@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rama.ipg.constants.IPGConstants;
 import com.rama.ipg.model.IPGRetObj;
+import com.rama.ipg.model.Tenant;
 import com.rama.ipg.model.TenantWrapper;
 import com.rama.ipg.repository.BedRepository;
 import com.rama.ipg.repository.RegisterRepository;
@@ -45,13 +46,20 @@ public class LoginController {
 		
 		if(role.equals(IPGConstants.TENANT_CODE)){
 			
-			TenantWrapper tenantWrapper =new TenantWrapper();
-			tenantWrapper.setTenant( tenantRepository.getTenant(id, pwd));
-			if(tenantWrapper.getTenant() != null){
-				tenantWrapper.setBed(bedRepository.getBed(tenantWrapper.getTenant().getId()));
+			
+			Tenant tenant = tenantRepository.getTenant(id, pwd);
+			if(tenant != null){
+				TenantWrapper tenantWrapper =new TenantWrapper();
+				tenantWrapper.setTenant(tenant );
+				if(tenantWrapper.getTenant() != null){
+					tenantWrapper.setBed(bedRepository.findBedByTenant(tenantWrapper.getTenant().getId()));
+				} 
+				iPGRetObj.setRetMsg(tenantWrapper);
+			}else{
+				iPGRetObj.setRetMsg(null);
 			} 
 			
-			iPGRetObj.setRetMsg(tenantWrapper);
+			
 		}else if(role.equals(IPGConstants.OWNER_CODE)){
 			
 			iPGRetObj.setRetMsg(registerRepository.getOwner(id, pwd));

@@ -18,7 +18,7 @@ import javax.persistence.Transient;
 @Table(name = "hostel")
 public  class Hostel implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final Long serialVersionUID = 1L;
 
 	@Id  
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -135,7 +135,7 @@ public  class Hostel implements Serializable {
 		this.zipcode = zipcode;
 	}
 	 
-	public static long getSerialversionuid() {
+	public static Long getSerialversionuid() {
 		return serialVersionUID;
 	}
 	

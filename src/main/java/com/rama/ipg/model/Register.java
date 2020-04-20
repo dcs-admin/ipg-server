@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Table(name = "register")
 public  class Register implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final Long serialVersionUID = 1L;
 
 	 
 	//@GeneratedValue(strategy = GenerationType.AUTO)
@@ -113,7 +113,7 @@ public  class Register implements Serializable {
 	public void setOtp(String otp) {
 		this.otp = otp;
 	}
-	public static long getSerialversionuid() {
+	public static Long getSerialversionuid() {
 		return serialVersionUID;
 	}
 	public String getPassword() {

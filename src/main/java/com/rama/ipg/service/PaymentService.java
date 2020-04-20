@@ -362,7 +362,7 @@ public class PaymentService {
 		Date date = new Date(); 
 		String month = new SimpleDateFormat("MMMM").format(date); 
 		String year = new SimpleDateFormat("YYYY").format(date); 
-		long sum = payments.stream().mapToLong(Payment::getAmount).sum();
+		Long sum = payments.stream().mapToLong(Payment::getAmount).sum();
 		
 		reqParamtersMap.put("name", register.getName());
 		reqParamtersMap.put("mobileNumber", register.getMobileNumber());

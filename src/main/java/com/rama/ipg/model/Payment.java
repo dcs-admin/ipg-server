@@ -26,15 +26,15 @@ public class Payment implements Serializable {
 	@Column Long  pid ;  
 	
 	
-	@Column private  String  tenantId   ;   
+	@Column private  Long  tenantId   ;   
 	@Column private  String  tName  ;       
 	@Column private  Date  paidDate  ;    
-	@Column private  long  amount   ;     
-	@Column private  long  pendingAmount ;
+	@Column private  Long  amount   ;     
+	@Column private  Long  pendingAmount ;
 	@Column private  String  comments ;     
 	@Column private  String  rentMethod  ;  
 
-	@Column private  String  hostelId  ;    
+	@Column private  Long  hostelId  ;    
 	@Column private  String  hostelName; 
 	@Column private String ownerId		;
 	
@@ -45,10 +45,10 @@ public class Payment implements Serializable {
 	public void setPid(Long pid) {
 		this.pid = pid;
 	}
-	public String getTenantId() {
+	public Long getTenantId() {
 		return tenantId;
 	}
-	public void setTenantId(String tenantId) {
+	public void setTenantId(Long tenantId) {
 		this.tenantId = tenantId;
 	}
 	public String gettName() {
@@ -63,16 +63,16 @@ public class Payment implements Serializable {
 	public void setPaidDate(Date paidDate) {
 		this.paidDate = paidDate;
 	}
-	public long getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
-	public void setAmount(long amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
-	public long getPendingAmount() {
+	public Long getPendingAmount() {
 		return pendingAmount;
 	}
-	public void setPendingAmount(long pendingAmount) {
+	public void setPendingAmount(Long pendingAmount) {
 		this.pendingAmount = pendingAmount;
 	}
 	public String getComments() {
@@ -87,10 +87,10 @@ public class Payment implements Serializable {
 	public void setRentMethod(String rentMethod) {
 		this.rentMethod = rentMethod;
 	}
-	public String getHostelId() {
+	public long getHostelId() {
 		return hostelId;
 	}
-	public void setHostelId(String hostelId) {
+	public void setHostelId(long hostelId) {
 		this.hostelId = hostelId;
 	}
 	public String getHostelName() {

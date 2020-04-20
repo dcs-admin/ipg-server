@@ -23,43 +23,34 @@ public class Room {
 	
 	@Id  
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column Long  id ;  
+	@Column private Long  roomId 		;
 	
-	@Column private String  roomId 		;
 	@Column private String  roomNumber;
 	@Column private String  roomType	;
-	@Column private long  roomRent;	
+	@Column private Long  roomRent;	
 	@Column private String  roomDesc ;
 	@Column private String  floor 	;
 	
-	@Column private long  hostelId 	;
+	@Column private Long  hostelId 	;
 	
 	@Transient
 	private List<Bed> beds;
 
-	
-	
-	public Long getId() {
-		return id;
-	}
+	 
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getRoomId() {
+	public Long getRoomId() {
 		return roomId;
 	}
 
-	public void setRoomId(String roomId) {
+	public void setRoomId(Long roomId) {
 		this.roomId = roomId;
 	}
 
-	public long getHostelId() {
+	public Long getHostelId() {
 		return hostelId;
 	}
 
-	public void setHostelId(long hostelId) {
+	public void setHostelId(Long hostelId) {
 		this.hostelId = hostelId;
 	}
 
@@ -79,11 +70,11 @@ public class Room {
 		this.roomType = roomType;
 	}
 
-	public long getRoomRent() {
+	public Long getRoomRent() {
 		return roomRent;
 	}
 
-	public void setRoomRent(long roomRent) {
+	public void setRoomRent(Long roomRent) {
 		this.roomRent = roomRent;
 	}
 

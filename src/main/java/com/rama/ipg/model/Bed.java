@@ -23,30 +23,30 @@ public class Bed  implements Serializable{
 	
 	@Id  
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column Long  id ;   
+	@Column Long  bedId ;   
 	
-	@Column private  long  hostelId ; 
+	@Column private  Long  hostelId ; 
 	@Column private  String  hostelName ;   
 	@Column private  String  floor   ;     
-	@Column private  long  roomId   ;     
+	@Column private  Long  roomId   ;     
 	@Column private  String  roomNumber  ;  
 	@Column private  String  bedNumber    ; 
 	@Column private  String  sharingType ;  
 	@Column private  String  status    ;    
-	@Column private  String  tenantId  ;    
+	@Column private  Long  tenantId  ;    
 	@Column private  String  tName    ;     
 	@Column private  String  bookedDate ;   
 	@Column private  String  rent    ;      
 	@Column private String ownerId		;
 	
-	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
 	 
+	 
+	public Long getBedId() {
+		return bedId;
+	}
+	public void setBedId(Long bedId) {
+		this.bedId = bedId;
+	}
 	public String getHostelName() {
 		return hostelName;
 	}
@@ -60,16 +60,16 @@ public class Bed  implements Serializable{
 		this.floor = floor;
 	}
 	 
-	public long getHostelId() {
+	public Long getHostelId() {
 		return hostelId;
 	}
-	public void setHostelId(long hostelId) {
+	public void setHostelId(Long hostelId) {
 		this.hostelId = hostelId;
 	}
-	public long getRoomId() {
+	public Long getRoomId() {
 		return roomId;
 	}
-	public void setRoomId(long roomId) {
+	public void setRoomId(Long roomId) {
 		this.roomId = roomId;
 	}
 	public String getRoomNumber() {
@@ -96,10 +96,10 @@ public class Bed  implements Serializable{
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public String getTenantId() {
+	public Long getTenantId() {
 		return tenantId;
 	}
-	public void setTenantId(String tenantId) {
+	public void setTenantId(Long tenantId) {
 		this.tenantId = tenantId;
 	}
 	public String gettName() {
@@ -129,8 +129,8 @@ public class Bed  implements Serializable{
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Bed [id=");
-		builder.append(id);
+		builder.append("Bed [bedId=");
+		builder.append(bedId);
 		builder.append(", hostelId=");
 		builder.append(hostelId);
 		builder.append(", hostelName=");
@@ -159,9 +159,7 @@ public class Bed  implements Serializable{
 		builder.append(ownerId);
 		builder.append("]");
 		return builder.toString();
-	} 
-	
-	
-	
+	}
+	 
 
 }

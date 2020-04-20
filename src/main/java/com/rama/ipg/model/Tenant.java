@@ -24,9 +24,8 @@ public class Tenant implements Serializable {
 
 	@Id  
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column Long  tid ;  
-	
-	@Column private  String id;
+	@Column Long  id ;  
+	 
 	@Column private  String name;
 	@Column private  String desc; 
 	@Column private  String address_line1;
@@ -61,18 +60,7 @@ public class Tenant implements Serializable {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public Long getTid() {
-		return tid;
-	}
-	public void setTid(Long tid) {
-		this.tid = tid;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
+	 
 	public String getName() {
 		return name;
 	}
@@ -213,12 +201,16 @@ public class Tenant implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Tenant [tid=");
-		builder.append(tid);
-		builder.append(", id=");
+		builder.append("Tenant [id=");
 		builder.append(id);
 		builder.append(", name=");
 		builder.append(name);
@@ -264,10 +256,13 @@ public class Tenant implements Serializable {
 		builder.append(eSignature);
 		builder.append(", ownerId=");
 		builder.append(ownerId);
+		builder.append(", password=");
+		builder.append("*****");
+		builder.append(", status=");
+		builder.append(status);
 		builder.append("]");
 		return builder.toString();
-	} 
-	
-	
+	}
+	 
 
 }

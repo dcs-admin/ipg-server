@@ -42,7 +42,7 @@ public class SupervisorController {
 		
 		logger.info("In::/supervisor:"+supervisor);
 		
-		//supervisorService.sendJoiningAlerts(supervisor);
+		supervisorService.sendJoiningAlerts(supervisor);
 		supervisor = supervisorRepository.save(supervisor);
 		
 		logger.info("Out::"+supervisor);

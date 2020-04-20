@@ -14,8 +14,8 @@ import com.rama.ipg.model.Hostel;
 public interface HostelRepository extends JpaRepository<Hostel, Long> {
 
 	 
-	@Query(value="UPDATE hostel h set h.supervisor_id=?3  WHERE h.name=?1 and h.owner_id=?2",  nativeQuery=true) 
-	public void updateSupervisor(String hostelName, String ownerId, String supervisorId);
+	//@Query(value="UPDATE hostel h set h.supervisor_id=?3  WHERE h.name=?1 and h.owner_id=?2",  nativeQuery=true) 
+	//public void updateSupervisor(String hostelName, String ownerId, String supervisorId);
 	
 	
 	@Query(value="SELECT h FROM Hostel h WHERE h.name=?1 and h.ownerId=?2") 
@@ -23,8 +23,16 @@ public interface HostelRepository extends JpaRepository<Hostel, Long> {
 	
 	
 	
-	@Query(value="SELECT t.name FROM Hostel t WHERE t.supervisorId=?1") 
+	@Query(value="SELECT h.name FROM Hostel h WHERE h.supervisorId=?1") 
 	public List<String> getHostelsForSupervisor(String supervisorId);
+	
+	
+	@Query(value="SELECT h FROM Hostel h WHERE h.ownerId=?1") 
+	public List<Hostel> getHostelsByOwner( String ownerId);
+	
+	
+	@Query(value="SELECT h FROM Hostel h WHERE h.ownerId=?1 and h.supervisorId=?2") 
+	public List<Hostel>getHostelsBySupervisor( String ownerId,  String supervisorId);
 	
 	
 	

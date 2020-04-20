@@ -2,6 +2,8 @@ package com.rama.ipg.repository;
 
  
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -15,10 +17,14 @@ public interface TenantRepository extends JpaRepository<Tenant, Long> {
 	public Tenant getTenant(String tid, String pwd);
 	
 	@Query(value="SELECT t FROM Tenant t WHERE t.id=?1 and t.ownerId=?2") 
-	public Tenant getTenantByIdAndOwner(String id, String ownerId);
+	public Tenant getTenantByIdAndOwner(Long id, String ownerId);
 	
 	
 	@Query(value="SELECT t FROM Tenant t WHERE t.phoneNumber=?1 and t.ownerId=?2") 
 	public Tenant getTenantByPhoneAndOwner(String phoneNumber, String ownerId);
+	
+	
+	@Query(value="SELECT t FROM Tenant t WHERE t.ownerId IN (?1,?2 )") 
+	public List<Tenant> getTenantsByOwner(String ownerId, String supervisorId);
 	  
  }
