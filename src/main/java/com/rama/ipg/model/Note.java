@@ -21,24 +21,16 @@ import javax.persistence.Table;
 @Table(name = "note")
 public class Note implements Serializable {
 	
-
+ 
 	@Id  
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column Long  nid ;  
-	
+	@GeneratedValue(strategy=GenerationType.AUTO) 
 	@Column private  String id;
+	
 	@Column private  String header;
 	@Column private  String content; 
 	@Column private  Date date;
-	@Column private  String ownerId;
-	
-	
-	public Long getNid() {
-		return nid;
-	}
-	public void setNid(Long nid) {
-		this.nid = nid;
-	}
+	@Column private  Long ownerId;
+	@Column private  String role;
 	public String getId() {
 		return id;
 	}
@@ -57,25 +49,28 @@ public class Note implements Serializable {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	 
 	public Date getDate() {
 		return date;
 	}
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public String getOwnerId() {
+	public Long getOwnerId() {
 		return ownerId;
 	}
-	public void setOwnerId(String ownerId) {
+	public void setOwnerId(Long ownerId) {
 		this.ownerId = ownerId;
+	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
 	}
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Note [nid=");
-		builder.append(nid);
-		builder.append(", id=");
+		builder.append("Note [id=");
 		builder.append(id);
 		builder.append(", header=");
 		builder.append(header);
@@ -85,9 +80,13 @@ public class Note implements Serializable {
 		builder.append(date);
 		builder.append(", ownerId=");
 		builder.append(ownerId);
+		builder.append(", role=");
+		builder.append(role);
 		builder.append("]");
 		return builder.toString();
-	}  
+	}
+	
+	 
 	
 	 
 }

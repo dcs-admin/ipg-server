@@ -23,6 +23,7 @@ import com.rama.ipg.communication.IPGSmsGateway;
 import com.rama.ipg.constants.SMSTemplates;
 import com.rama.ipg.model.Tenant;
 import com.rama.ipg.model.TenantWrapper;
+import com.rama.ipg.repository.RegisterRepository;
 import com.rama.ipg.util.PasswordGenerator;
 
 import freemarker.template.TemplateException;
@@ -49,6 +50,9 @@ public class TenantService {
 	
 	@Autowired
 	private PasswordGenerator passwordGenerator;
+	
+	@Autowired
+	private RegisterRepository registerRepository;
 	
 	  
 	public void sendJoiningAlerts(TenantWrapper tenantWrapper){
@@ -81,10 +85,10 @@ public class TenantService {
 			logger.debug("In::triggerJoiningEmail");
 
 			String email, subject, ccMail, bccMail, message = null;
-			email = tenant.getEmail();
+			email = tenant.getEmail(); 
 			 
 			subject = tenant.getName()+", your vacation confirmed with your current PG";
-			ccMail = null;
+			ccMail = registerRepository.getEmail(tenant.getOwnerId());
 			bccMail = null; 
 						 
 			message = this.getTemplate("tenant-vacation", tenant);

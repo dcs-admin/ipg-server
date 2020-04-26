@@ -6,7 +6,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,16 +49,31 @@ public class PaymentController {
 	}
 	
 	
+	@DeleteMapping("/payments/{pid}")
+	public ResponseEntity<?> deletePayment(@PathVariable Long pid) {
+		logger.info("IN::deleteTenant::" + pid);
+
+		paymentRepository.findById(pid).ifPresent(payment ->{ 
+			
+			paymentRepository.deleteById(pid); 
+			
+		}); 
+		
+		return ResponseEntity.ok().build();
+	}
+	
+	
+	
 	@GetMapping("/payments/{role}") 
 	public List<Payment> getPayments(
 			@PathVariable("role") String role,
-			@RequestParam("ownerId") String ownerId ,
-			@RequestParam("supervisorId") String supervisorId,
+			@RequestParam("ownerId") Long ownerId ,
+			@RequestParam("supervisorId") Long supervisorId,
 			@RequestParam("year") int year ,
 			@RequestParam("month") int month
 			) {
 		
-		logger.info("In::/hostels/{role}"+role+";o"+ownerId+";s"+supervisorId+";y"+year+";m"+month); 
+		logger.info("In::/payments/{role}"+role+";o"+ownerId+";s"+supervisorId+";y"+year+";m"+month); 
 		
 		List<Payment> payments = new ArrayList<Payment>();
 		if(role.equals(IPGConstants.OWNER_CODE)){
@@ -73,6 +90,19 @@ public class PaymentController {
 		return payments;
 	}
 	
+	
+	
+	@GetMapping("/payments-history/{tid}") 
+	public List<Payment> getPaymentHistory(
+			@PathVariable("tid") Long tid
+			) {
+		
+		logger.info("In::/payments/{tid}"+tid); 
+		List<Payment> payments  = paymentRepository.getPaymentHistory(tid); 
+		
+		logger.info("Out::"+payments);
+		return payments;
+	}
 	
 
 }

@@ -13,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @author Mine
  *
@@ -33,7 +35,7 @@ public class Tenant implements Serializable {
 	@Column private  String city;
 	@Column private  String state;
 	@Column private  String zipcode; 
-	@Column private  String phoneNumber;
+	@Column private  Long phoneNumber;
 	@Column private  String aadhar;
 	@Column private  String emergency;
 	@Column private  String email;
@@ -47,9 +49,11 @@ public class Tenant implements Serializable {
 	@Column private  String rentAmount;
 	@Column private  String advanceAmount;
 	@Column private  String eSignature;
-	@Column private String ownerId;
 	
-	@Column private String password	;
+	@Column private Long ownerId;
+	@Column private Long supervisorId;
+	
+	@Column @JsonIgnore private String password	;
 	
 	@Column private String status ="A"	;
 	
@@ -103,10 +107,10 @@ public class Tenant implements Serializable {
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
-	public String getPhoneNumber() {
+	public Long getPhoneNumber() {
 		return phoneNumber;
 	}
-	public void setPhoneNumber(String phoneNumber) {
+	public void setPhoneNumber(Long phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 	public String getAadhar() {
@@ -188,13 +192,20 @@ public class Tenant implements Serializable {
 	public void seteSignature(String eSignature) {
 		this.eSignature = eSignature;
 	}
-	public String getOwnerId() {
+	 
+	
+	public Long getOwnerId() {
 		return ownerId;
 	}
-	public void setOwnerId(String ownerId) {
+	public void setOwnerId(Long ownerId) {
 		this.ownerId = ownerId;
-	} 
-	
+	}
+	public Long getSupervisorId() {
+		return supervisorId;
+	}
+	public void setSupervisorId(Long supervisorId) {
+		this.supervisorId = supervisorId;
+	}
 	public String getPassword() {
 		return password;
 	}
@@ -256,8 +267,10 @@ public class Tenant implements Serializable {
 		builder.append(eSignature);
 		builder.append(", ownerId=");
 		builder.append(ownerId);
+		builder.append(", supervisorId=");
+		builder.append(supervisorId);
 		builder.append(", password=");
-		builder.append("*****");
+		builder.append("*******");
 		builder.append(", status=");
 		builder.append(status);
 		builder.append("]");

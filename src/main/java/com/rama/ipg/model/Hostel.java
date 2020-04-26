@@ -26,6 +26,7 @@ public  class Hostel implements Serializable {
 	
 	@Column private String name			;
 	@Column private String desc			;
+	@Column private String type			;
 	//  private String rooms		;
 	//  private String facilities	; 
 	@Column private String goGlobal		;
@@ -37,19 +38,26 @@ public  class Hostel implements Serializable {
 	@Column private String zipcode 		; 
 	@Column private Date date			;
 	@Column private Date updDate		; 
-	@Column private String ownerId		; 
-	
-	@Column private String supervisorId	;
+	@Column private Long ownerId		; 
+	@Column private Long supervisorId	;
 	 
+	@Transient
+	private Facilities facilities;
 	
 	@Transient
 	private List<Room> rooms;
 	 
 
-	public String getSupervisorId() {
+	public Long getSupervisorId() {
 		return supervisorId;
 	}
-	public void setSupervisorId(String supervisorId) {
+	public Facilities getFacilities() {
+		return facilities;
+	}
+	public void setFacilities(Facilities facilities) {
+		this.facilities = facilities;
+	}
+	public void setSupervisorId(Long supervisorId) {
 		this.supervisorId = supervisorId;
 	}
 	public List<Room> getRooms() {
@@ -73,6 +81,12 @@ public  class Hostel implements Serializable {
 	}
 	
 	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	//  private String photos		;
 	public Long getId() {
 		return id;
@@ -140,10 +154,10 @@ public  class Hostel implements Serializable {
 	}
 	
 	
-	public String getOwnerId() {
+	public Long getOwnerId() {
 		return ownerId;
 	}
-	public void setOwnerId(String ownerId) {
+	public void setOwnerId(Long ownerId) {
 		this.ownerId = ownerId;
 	}
 	@Override

@@ -29,6 +29,7 @@ import com.rama.ipg.constants.IPGConstants;
 import com.rama.ipg.model.Hostel;
 import com.rama.ipg.model.Room;
 import com.rama.ipg.repository.BedRepository;
+import com.rama.ipg.repository.FacilitiesRepository;
 import com.rama.ipg.repository.HostelRepository;
 import com.rama.ipg.repository.RoomRepository;
 import com.rama.ipg.service.StorageService;
@@ -49,6 +50,9 @@ public class HostelController {
 	
 	@Autowired
 	private BedRepository bedRepository;
+	
+	@Autowired
+	private FacilitiesRepository facilitiesRepository;
 	
 	@Autowired
 	private StorageService storageService;
@@ -73,6 +77,9 @@ public class HostelController {
 			}); 
 		});
 		
+		hostel.getFacilities().setHostelId(savedHostel.getId());
+		facilitiesRepository.save(hostel.getFacilities());
+		
 		logger.info("Out::"+hostel);
 		return hostel;
 	}
@@ -80,8 +87,8 @@ public class HostelController {
 	
 	@PostMapping("/hostels/supervisor") 
 	public String updateSupervisors(@RequestParam("hostelName") String hostelName,
-			@RequestParam("ownerId") String ownerId ,
-			@RequestParam("supervisorId") String supervisorId) {
+			@RequestParam("ownerId") Long ownerId ,
+			@RequestParam("supervisorId") Long supervisorId) {
 		
 		logger.info("In::/hostels:"+ownerId+";"+hostelName); 
 		  
@@ -127,7 +134,9 @@ public class HostelController {
 			hostel.getRooms().forEach(room -> { 
 				 room.setBeds(bedRepository.getBeds(room.getHostelId(), room.getRoomId()));
 				}
-			 ); 
+			 );
+			
+			hostel.setFacilities(facilitiesRepository.findByHostelId(hostel.getId()));
 		} 
 		 
 		logger.info("Out::"+hostel);
@@ -140,8 +149,8 @@ public class HostelController {
 	@GetMapping("/hostels/byrole/{role}") 
 	public List<Hostel> getHostels(
 			@PathVariable("role") String role,
-			@RequestParam("ownerId") String ownerId ,
-			@RequestParam("supervisorId") String supervisorId
+			@RequestParam("ownerId") Long ownerId ,
+			@RequestParam("supervisorId") Long supervisorId
 			) {
 		
 		logger.info("In::/hostels/{role}"+role+";o"+ownerId+";s"+supervisorId); 
@@ -162,6 +171,8 @@ public class HostelController {
 			hostel.getRooms().forEach(room -> { 
 				 room.setBeds(bedRepository.getBeds(hostel.getId(), room.getRoomId())); 
 			}); 
+			
+			hostel.setFacilities(facilitiesRepository.findByHostelId(hostel.getId()));
 		});
 		 
 		

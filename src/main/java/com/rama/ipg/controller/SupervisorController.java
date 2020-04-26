@@ -52,7 +52,7 @@ public class SupervisorController {
 	
 	
 	@GetMapping("/supervisors/{ownerId}") 
-	public List<Supervisor> getSupervisors(@PathVariable(value = "ownerId") String ownerId ) {
+	public List<Supervisor> getSupervisors(@PathVariable(value = "ownerId") Long ownerId ) {
 		
 		logger.info("In::/supervisors/"+ownerId); 
 		List<Supervisor> supervisors = supervisorRepository.getSupervisorsForOwner(ownerId); 
@@ -67,7 +67,7 @@ public class SupervisorController {
 	}
 	
 	@GetMapping("/supervisors/") 
-	public Supervisor getSupervisor(@RequestParam("id") String id,@RequestParam("pwd") String pwd ) {
+	public Supervisor getSupervisor(@RequestParam("id") Long id,@RequestParam("pwd") String pwd ) {
 		
 		logger.info("In::/supervisors/id:"+id); 
 		Supervisor supervisor = supervisorRepository.getSupervisorWithPwd(id, pwd); 
@@ -77,7 +77,7 @@ public class SupervisorController {
 	}
 	
 	@DeleteMapping("/supervisors") 
-	public Supervisor deleteSupervisor(@RequestParam("id") String id ) {
+	public Supervisor deleteSupervisor(@RequestParam("id") Long id ) {
 		
 		logger.info("In::/supervisors/id:"+id); 
 		Supervisor supervisor = supervisorRepository.deleteByPhoneNumber(id);

@@ -1,5 +1,9 @@
 package com.rama.ipg.controller;
 
+ 
+
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rama.ipg.constants.IPGConstants;
 import com.rama.ipg.model.IPGRetObj;
+import com.rama.ipg.model.Register;
 import com.rama.ipg.model.Tenant;
 import com.rama.ipg.model.TenantWrapper;
 import com.rama.ipg.repository.BedRepository;
@@ -39,7 +44,7 @@ public class LoginController {
 	 
 	
 	@GetMapping("/login") 
-	public IPGRetObj login(@RequestParam("id") String id,@RequestParam("pwd") String pwd, @RequestParam("role") String role ) {
+	public IPGRetObj login(@RequestParam("id") Long id,@RequestParam("pwd") String pwd, @RequestParam("role") String role ) {
 		
 		logger.info("In::/login/tid:"+id);
 		IPGRetObj iPGRetObj = new IPGRetObj();
@@ -62,7 +67,15 @@ public class LoginController {
 			
 		}else if(role.equals(IPGConstants.OWNER_CODE)){
 			
-			iPGRetObj.setRetMsg(registerRepository.getOwner(id, pwd));
+			Register register = registerRepository.getOwner(id, pwd);
+			if(register != null){
+				Date today = new Date();
+				if(today.compareTo(register.getLicenceUpTo()) > 0){
+					register.setErrMsg("Subscription got expired on "+register.getLicenceUpTo());
+				}
+			}
+			iPGRetObj.setRetMsg(register);
+			
 			
 		}else if(role.equals(IPGConstants.SUPERVISOR_CODE)){
 			

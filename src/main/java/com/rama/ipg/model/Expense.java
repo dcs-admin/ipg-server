@@ -25,8 +25,10 @@ public class Expense implements Serializable {
 	@Column private  String  category ;      
 
 	@Column private  String  hostelId ;      
-	@Column private  String  hostelName ;  
-	@Column private String ownerId		;
+	@Column private  String  hostelName ; 
+	
+	@Column private Long ownerId		;
+	@Column private Long supervisorId		;
 	
 	
 	public Long getEid() {
@@ -72,11 +74,18 @@ public class Expense implements Serializable {
 	public void setHostelName(String hostelName) {
 		this.hostelName = hostelName;
 	}
-	public String getOwnerId() {
+	 
+	public Long getOwnerId() {
 		return ownerId;
 	}
-	public void setOwnerId(String ownerId) {
+	public void setOwnerId(Long ownerId) {
 		this.ownerId = ownerId;
+	}
+	public Long getSupervisorId() {
+		return supervisorId;
+	}
+	public void setSupervisorId(Long supervisorId) {
+		this.supervisorId = supervisorId;
 	}
 	@Override
 	public String toString() {

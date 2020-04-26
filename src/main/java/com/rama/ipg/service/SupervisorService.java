@@ -112,7 +112,7 @@ public class SupervisorService {
 			 
 			message = SMSTemplates.SUPERVISOR_ONBOARDING_TEMPLATE 
 					.replaceAll("##USER_NAME##", supervisor.getName())
-					.replaceAll("##OWNER##", supervisor.getOwnerId())
+					.replaceAll("##OWNER##", ""+supervisor.getOwnerId())
 					.replaceAll("##PASSWORD##", supervisor.getPassword()) ;
 
 			iPGSmsGateway.sendSMS("" + supervisor.getPhoneNumber(), message);

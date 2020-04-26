@@ -36,7 +36,8 @@ public class Payment implements Serializable {
 
 	@Column private  Long  hostelId  ;    
 	@Column private  String  hostelName; 
-	@Column private String ownerId		;
+	@Column private Long ownerId		;
+	@Column private Long supervisorId	; 
 	
 	
 	public Long getPid() {
@@ -99,11 +100,21 @@ public class Payment implements Serializable {
 	public void setHostelName(String hostelName) {
 		this.hostelName = hostelName;
 	}
-	public String getOwnerId() {
+	 
+	public Long getOwnerId() {
 		return ownerId;
 	}
-	public void setOwnerId(String ownerId) {
+	public void setOwnerId(Long ownerId) {
 		this.ownerId = ownerId;
+	}
+	public Long getSupervisorId() {
+		return supervisorId;
+	}
+	public void setSupervisorId(Long supervisorId) {
+		this.supervisorId = supervisorId;
+	}
+	public void setHostelId(Long hostelId) {
+		this.hostelId = hostelId;
 	}
 	@Override
 	public String toString() {
@@ -130,11 +141,11 @@ public class Payment implements Serializable {
 		builder.append(hostelName);
 		builder.append(", ownerId=");
 		builder.append(ownerId);
+		builder.append(", supervisorId=");
+		builder.append(supervisorId);
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
 	
 	
 

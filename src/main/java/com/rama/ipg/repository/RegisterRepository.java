@@ -12,7 +12,15 @@ import com.rama.ipg.model.Register;
 public interface RegisterRepository extends JpaRepository<Register, Long> {
 
 	@Query(value="SELECT t FROM Register t WHERE t.mobileNumber=?1 and t.password=?2") 
-	public Register getOwner(String tid, String pwd);
+	public Register getOwner(Long tid, String pwd);
+	
+	
+	@Query(value="SELECT t.email FROM Register t WHERE t.mobileNumber=?1") 
+	public String getEmail(Long mobileNumber);
+	
+	@Query(value="SELECT t FROM Register t WHERE t.mobileNumber=?1 ") 
+	public Register findByPhoneNumber(Long mobileNumber);
+	
 	
 	
 	/*

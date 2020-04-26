@@ -14,17 +14,20 @@ import com.rama.ipg.model.Tenant;
 public interface TenantRepository extends JpaRepository<Tenant, Long> {
 
 	@Query(value="SELECT t FROM Tenant t WHERE t.phoneNumber=?1 and t.password=?2") 
-	public Tenant getTenant(String tid, String pwd);
+	public Tenant getTenant(Long phoneNumber, String pwd);
 	
 	@Query(value="SELECT t FROM Tenant t WHERE t.id=?1 and t.ownerId=?2") 
-	public Tenant getTenantByIdAndOwner(Long id, String ownerId);
+	public Tenant getTenantByIdAndOwner(Long id, Long ownerId);
 	
 	
 	@Query(value="SELECT t FROM Tenant t WHERE t.phoneNumber=?1 and t.ownerId=?2") 
-	public Tenant getTenantByPhoneAndOwner(String phoneNumber, String ownerId);
+	public Tenant getTenantByPhoneAndOwner(Long phoneNumber, Long ownerId);
 	
 	
-	@Query(value="SELECT t FROM Tenant t WHERE t.ownerId IN (?1,?2 )") 
-	public List<Tenant> getTenantsByOwner(String ownerId, String supervisorId);
+	@Query(value="SELECT t FROM Tenant t WHERE t.ownerId=?1") 
+	public List<Tenant> getTenantsByOwnerId(Long ownerId);
+	
+	@Query(value="SELECT t FROM Tenant t WHERE t.supervisorId=?1") 
+	public List<Tenant> getTenantsBySupervisorId(Long supervisorId);
 	  
  }

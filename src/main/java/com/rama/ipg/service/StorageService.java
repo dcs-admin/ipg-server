@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -17,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -67,7 +69,7 @@ public class StorageService {
 	    java.nio.file.Files.copy( inputStream,  targetFile.toPath(),  StandardCopyOption.REPLACE_EXISTING);
 	   
 		} catch (IOException e) {
-			 throw new Exception("NS0001");
+			 throw new Exception("Unable to create file: "+e.getMessage());
 		}finally{
 			if( inputStream != null){
 			 IOUtils.closeQuietly(inputStream);
@@ -95,6 +97,24 @@ public class StorageService {
 		
 		return null;
     }
+	
+	
+	public List<InputStreamResource> retriveHostelImages(Long id, String cat) throws IOException {
+		 
+		File dir = new File(hostelRootLocation+File.separator+id+File.separator+cat);
+		 
+		List<InputStreamResource> iss = new ArrayList<InputStreamResource>();
+		if(dir.isDirectory()){
+			for(File file : dir.listFiles()){
+				InputStream targetStream = new FileInputStream(file);  
+				iss.add(new InputStreamResource(targetStream));
+				//targetStream.close(); 
+			} 
+		}
+		
+		 return iss;
+    }
+
 
 	
 	
@@ -114,12 +134,12 @@ public class StorageService {
 		targetDir = targetDir+File.separator+cat;
 		new File(targetDir).mkdir();
 		
-	    File targetFile = new File(targetDir+File.separator+file.getOriginalFilename());
+	    File targetFile = new File(targetDir+File.separator+"MyPic");
 	 
 	    java.nio.file.Files.copy( inputStream,  targetFile.toPath(),  StandardCopyOption.REPLACE_EXISTING);
 	   
 		} catch (IOException e) {
-			 throw new Exception("NS0001");
+			 throw new Exception("Unable to create file: "+e.getMessage());
 		}finally{
 			if( inputStream != null){
 			 IOUtils.closeQuietly(inputStream);
@@ -136,16 +156,19 @@ public class StorageService {
 		
 	}
 	
-	public  InputStream retrivetenantImage(Long id, String cat) throws IOException {
+	public  InputStreamResource retrivetenantImage(Long id, String cat) throws IOException {
 		 
 		File dir = new File(tenantRootLocation+File.separator+id+File.separator+cat);
+		InputStreamResource inputStreamResource= null;
 		if(dir.isDirectory()){
 			File file = dir.listFiles()[0]; 
-		    InputStream targetStream = new FileInputStream(file); 
-	       return targetStream;
-		}
+			InputStream targetStream = new FileInputStream(file); 
+			inputStreamResource = new InputStreamResource(targetStream);
+			//targetStream.close();
+	       //return targetStream;
+		} 
 		
-		return null;
+		return inputStreamResource;
     }
 
 	
@@ -172,7 +195,7 @@ public  void storeIdproofImage(MultipartFile file, String cat, Long id) throws E
     java.nio.file.Files.copy( inputStream,  targetFile.toPath(),  StandardCopyOption.REPLACE_EXISTING);
    
 	} catch (IOException e) {
-		 throw new Exception("NS0001");
+		 throw new Exception("Unable to create file: "+e.getMessage());
 	}finally{
 		if( inputStream != null){
 		 IOUtils.closeQuietly(inputStream);

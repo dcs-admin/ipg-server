@@ -9,6 +9,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "register")
@@ -20,7 +23,7 @@ public  class Register implements Serializable {
 	//@GeneratedValue(strategy = GenerationType.AUTO)
 	//private Long  id ; 
 	@Id 
-	@Column private String  mobileNumber ; 
+	@Column private Long  mobileNumber ; 
 	@Column private String  name ;
 	@Column private String  subscriptionType ;
 	@Column private Date  licenceUpTo ;
@@ -33,12 +36,19 @@ public  class Register implements Serializable {
 	@Column  private String  email ;
 	@Column  private String  amount ;
 	@Column  private String  otp ; 
-	@Column  private String  password ;
 	
-	public String getMobileNumber() {
-		return mobileNumber.trim() ;
+	
+	@Column  
+	@JsonIgnore
+	private String  password ;
+	
+	@Transient
+	private String  errMsg ;
+	
+	public Long getMobileNumber() {
+		return mobileNumber ;
 	}
-	public void setMobileNumber(String mobileNumber) {
+	public void setMobileNumber(Long mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
 	public String getName() {
@@ -121,6 +131,12 @@ public  class Register implements Serializable {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getErrMsg() {
+		return errMsg;
+	}
+	public void setErrMsg(String errMsg) {
+		this.errMsg = errMsg;
 	}
 	@Override
 	public String toString() {

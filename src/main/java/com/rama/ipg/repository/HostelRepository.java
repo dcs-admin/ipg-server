@@ -19,20 +19,20 @@ public interface HostelRepository extends JpaRepository<Hostel, Long> {
 	
 	
 	@Query(value="SELECT h FROM Hostel h WHERE h.name=?1 and h.ownerId=?2") 
-	public Hostel  getHostelByNameAndId(String hostelName, String ownerId);
+	public Hostel  getHostelByNameAndId(String hostelName, Long ownerId);
 	
 	
 	
 	@Query(value="SELECT h.name FROM Hostel h WHERE h.supervisorId=?1") 
-	public List<String> getHostelsForSupervisor(String supervisorId);
+	public List<String> getHostelsForSupervisor(Long supervisorId);
 	
 	
 	@Query(value="SELECT h FROM Hostel h WHERE h.ownerId=?1") 
-	public List<Hostel> getHostelsByOwner( String ownerId);
+	public List<Hostel> getHostelsByOwner( Long ownerId);
 	
 	
 	@Query(value="SELECT h FROM Hostel h WHERE h.ownerId=?1 and h.supervisorId=?2") 
-	public List<Hostel>getHostelsBySupervisor( String ownerId,  String supervisorId);
+	public List<Hostel>getHostelsBySupervisor( Long ownerId,  Long supervisorId);
 	
 	
 	

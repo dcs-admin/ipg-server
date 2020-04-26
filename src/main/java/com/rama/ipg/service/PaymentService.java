@@ -84,7 +84,7 @@ public class PaymentService {
 		
 		for(Register register: registerRepository.findAll()){ 
 			
-			List<Payment> payments = paymentRepository.findLastPayments(register.getMobileNumber()+"");
+			List<Payment> payments = paymentRepository.findLastPayments(register.getMobileNumber());
 			
 			logger.info("MN:"+register.getMobileNumber()+";payments: "+payments);
 			//if(payments.size() > 0){
@@ -212,7 +212,7 @@ public class PaymentService {
 			email = tenant.getEmail();
 			 
 			subject = payment.gettName()+", your payment confimation with "+payment.getHostelName();
-			ccMail = null;
+			ccMail = registerRepository.getEmail(tenant.getOwnerId());
 			bccMail = null; 
 						 
 			message = this.getTemplate("tenant-payment", payment);

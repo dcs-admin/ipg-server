@@ -3,7 +3,6 @@ package com.rama.ipg.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -27,8 +26,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.rama.ipg.constants.IPGConstants;
 import com.rama.ipg.model.Bed;
-import com.rama.ipg.model.Hostel;
-import com.rama.ipg.model.Room;
 import com.rama.ipg.model.Tenant;
 import com.rama.ipg.model.TenantWrapper;
 import com.rama.ipg.repository.BedRepository;
@@ -78,7 +75,7 @@ public class TenantController {
 	
 	
 	@GetMapping("/tenants") 
-	public TenantWrapper getTenant(@RequestParam("tid") String tid,@RequestParam("pwd") String pwd ) {
+	public TenantWrapper getTenant(@RequestParam("tid") Long tid,@RequestParam("pwd") String pwd ) {
 		
 		logger.info("In::/tenants/tid:"+tid);
 		
@@ -140,16 +137,20 @@ public class TenantController {
 	@GetMapping("/tenants/{role}") 
 	public List<Tenant> getTenants(
 			@PathVariable("role") String role,
-			@RequestParam("ownerId") String ownerId ,
+			@RequestParam("ownerId") Long ownerId ,
 			@RequestParam("supervisorId") String supervisorId
 			) {
 		
 		logger.info("In::/tenants/{role}"+role+";o"+ownerId+";s"+supervisorId); 
 		
 		List<Tenant> tenants = new ArrayList<Tenant>();
-		if(role.equals(IPGConstants.OWNER_CODE) || role.equals(IPGConstants.SUPERVISOR_CODE)){
+		if(role.equals(IPGConstants.OWNER_CODE) ){
 			
-			tenants = tenantRepository.getTenantsByOwner(ownerId, supervisorId);
+			tenants = tenantRepository.getTenantsByOwnerId(ownerId);
+			
+		}else if( role.equals(IPGConstants.SUPERVISOR_CODE)){
+			
+			tenants = tenantRepository.getTenantsBySupervisorId(Long.parseLong((supervisorId)));
 			
 		}  
 		
@@ -194,24 +195,24 @@ public class TenantController {
 		return tenantWrapper;
 	}
 	
-	@PostMapping("/users/{id}/upload/{cat}") 
+	@PostMapping("/tenants/{id}/upload/{cat}") 
 	public void storeTenantImage(@PathVariable("id") Long id, @RequestParam("file") MultipartFile file,
 			@PathVariable("cat") String cat) throws Exception {
 
-		logger.info("IN::POST::/users/{id}/upload/{cat}::uploadTenantImages::" + id + "::" + cat);
+		logger.info("IN::POST::/tenants/{id}/upload/{cat}::uploadTenantImages::" + id + "::" + cat);
 		storageService.storeTenantImage(file, cat, id);
-		logger.info("OUT::POST:://users/uploadImage/{cat}/{id}::uploadTenantImages::" + id + "::" + cat);
+		logger.info("OUT::POST:://tenants/uploadImage/{cat}/{id}::uploadTenantImages::" + id + "::" + cat);
 
 	} 
 	
-	@GetMapping("/users/{id}/retrive/{cat}") 
+	@GetMapping("/tenants/{id}/retrive/{cat}") 
 	public ResponseEntity<InputStreamResource> retriveTenantImage(@PathVariable("id") Long id,
 			@PathVariable("cat") String cat) throws Exception, IOException {
-		logger.info("IN::POST::/users/{id}/retrive/{cat}::retriveHostelImage::" + id + "::" + cat);
-		logger.info("OUT::POST::/users/{id}/retrive/{cat}::retriveHostelImage::" + id + "::" + cat);
+		logger.info("IN::POST::/tenants/{id}/retrive/{cat}::retriveHostelImage::" + id + "::" + cat);
+		logger.info("OUT::POST::/tenants/{id}/retrive/{cat}::retriveHostelImage::" + id + "::" + cat);
 
 		return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG)
-				.body(new InputStreamResource(storageService.retrivetenantImage(id, cat)));
+				.body(storageService.retrivetenantImage(id, cat));
 
 	}
 

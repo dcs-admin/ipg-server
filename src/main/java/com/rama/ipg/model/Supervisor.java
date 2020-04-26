@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @author Mine
  *
@@ -26,12 +28,12 @@ public class Supervisor {
 //		private Long  id ; 
 //		
 		@Id 
-		@Column private String  phoneNumber ; 
+		@Column private Long  phoneNumber ; 
 		@Column private String  name ;  
 		@Column  private String  email ;
-		@Column  private String  password ;
+		@Column @JsonIgnore private String  password ;
 		
-		@Column  private String  ownerId ;
+		@Column  private Long  ownerId ;
 		
 		@Transient
 		private List<String> managedHostels = new ArrayList();
@@ -46,11 +48,11 @@ public class Supervisor {
 			this.managedHostels = managedHostels;
 		}
 
-		public String getPhoneNumber() {
+		public Long getPhoneNumber() {
 			return phoneNumber;
 		}
 
-		public void setPhoneNumber(String phoneNumber) {
+		public void setPhoneNumber(Long phoneNumber) {
 			this.phoneNumber = phoneNumber;
 		}
 
@@ -78,11 +80,11 @@ public class Supervisor {
 			this.password = password;
 		}
 
-		public String getOwnerId() {
+		public Long getOwnerId() {
 			return ownerId;
 		}
 
-		public void setOwnerId(String ownerId) {
+		public void setOwnerId(Long ownerId) {
 			this.ownerId = ownerId;
 		}
 
