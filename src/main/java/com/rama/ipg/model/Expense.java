@@ -20,7 +20,7 @@ public class Expense implements Serializable {
 	@Column Long  eid ;  
 
 	@Column private  Date  eDate ;         
-	@Column private  String  amount  ;       
+	@Column private  Long  amount  ;       
 	@Column private  String  comments  ;     
 	@Column private  String  category ;      
 
@@ -44,10 +44,10 @@ public class Expense implements Serializable {
 	public void seteDate(Date eDate) {
 		this.eDate = eDate;
 	}
-	public String getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
-	public void setAmount(String amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
 	public String getComments() {

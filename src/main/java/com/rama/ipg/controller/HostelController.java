@@ -26,9 +26,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.rama.ipg.constants.IPGConstants;
+import com.rama.ipg.model.ContactInfo;
 import com.rama.ipg.model.Hostel;
 import com.rama.ipg.model.Room;
 import com.rama.ipg.repository.BedRepository;
+import com.rama.ipg.repository.ContactInfoRepository;
 import com.rama.ipg.repository.FacilitiesRepository;
 import com.rama.ipg.repository.HostelRepository;
 import com.rama.ipg.repository.RoomRepository;
@@ -52,12 +54,27 @@ public class HostelController {
 	private BedRepository bedRepository;
 	
 	@Autowired
+	private ContactInfoRepository contactInfoRepository;
+	
+	@Autowired
 	private FacilitiesRepository facilitiesRepository;
 	
 	@Autowired
 	private StorageService storageService;
 	
 	
+	@GetMapping("/hostels") 
+	public List<Hostel> findAllHostels() {
+		
+		List<Hostel> hostels = new ArrayList<>();
+		
+		for(Hostel hostel : hostelRepository.findAll()){
+			hostels.add(this.getHostel(hostel.getId()));
+		}
+		
+		return hostels;
+		
+	}
 	
 	@PostMapping("/hostels") 
 	public Hostel saveHostel(@RequestBody Hostel  hostel) {
@@ -79,6 +96,12 @@ public class HostelController {
 		
 		hostel.getFacilities().setHostelId(savedHostel.getId());
 		facilitiesRepository.save(hostel.getFacilities());
+		
+		for(ContactInfo contactInfo : hostel.getContacts()){
+			contactInfo.setHostelId(savedHostel.getId());
+			contactInfo.setHostelName(savedHostel.getName());
+			contactInfoRepository.save(contactInfo);
+		}
 		
 		logger.info("Out::"+hostel);
 		return hostel;
@@ -115,6 +138,8 @@ public class HostelController {
 		
 		bedRepository.deleteByHostelId(hostelId);
 		
+		contactInfoRepository.deleteByHostelId(hostelId);
+		
 		return ResponseEntity.ok().build();
 	}
 	
@@ -137,11 +162,22 @@ public class HostelController {
 			 );
 			
 			hostel.setFacilities(facilitiesRepository.findByHostelId(hostel.getId()));
+			
+			hostel.setContacts(contactInfoRepository.findByHostelId(hostel.getId()));
 		} 
 		 
 		logger.info("Out::"+hostel);
 		return hostel;	 
 		
+		
+	}
+	
+	
+	@GetMapping("/hostels-contacts/{hostelId}") 
+	public List<ContactInfo> getContactsFromHostel(@PathVariable("hostelId") Long hostelId){
+		logger.info("In::/hostels-contacts/{hostelId}"+hostelId); 
+		logger.info("Out");
+		return contactInfoRepository.findByHostelId(hostelId);
 		
 	}
 	
@@ -173,6 +209,8 @@ public class HostelController {
 			}); 
 			
 			hostel.setFacilities(facilitiesRepository.findByHostelId(hostel.getId()));
+			
+			hostel.setContacts(contactInfoRepository.findByHostelId(hostel.getId()));
 		});
 		 
 		
@@ -194,19 +232,26 @@ public class HostelController {
 				bed.setRoomId(savedRoom.getRoomId());
 				bedRepository.save(bed);
 			}); 
-		}); 
+		});
+		
+		hostel.getFacilities().setHostelId(savedHostel.getId());
+		facilitiesRepository.save(hostel.getFacilities());
+		
+		for(ContactInfo contactInfo : hostel.getContacts()){
+			contactInfoRepository.save(contactInfo);
+		}
 		
 		logger.info("Out::"+hostel);
 		return hostel;
 	}
 	
 	
-	@PostMapping("/hostels/{id}/upload/{cat}") 
+	@PostMapping("/hostels/{id}/upload/{cat}/{picnum}") 
 	public void storeHostelImage(@PathVariable("id") Long id, @RequestParam("file") MultipartFile file,
-			@PathVariable("cat") String cat) throws Exception  {
+			@PathVariable("cat") String cat, @PathVariable("picnum") String picnum) throws Exception  {
 
 		logger.info("In::POST::/hostels/{id}/upload/{cat}::uploadHostelImages::" + id + "::" + cat);
-		storageService.storeHostelImage(file, cat, id);
+		storageService.storeHostelImage(file, cat, id, picnum);
 		logger.info("OUT::POST:://hostels/uploadImage/{cat}/{id}::uploadHostelImages::" + id + "::" + cat);
 
 	}

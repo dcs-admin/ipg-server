@@ -65,3 +65,5 @@ fastlane/test_output
 fastlane/readme.md
 /target/
 /target/nest-server-0.0.1.jar
+/hostels/
+/tenants

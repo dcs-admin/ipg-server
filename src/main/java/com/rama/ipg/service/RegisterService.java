@@ -193,6 +193,34 @@ public class RegisterService {
 		return output;
 	}
 
+	
+	
+	/**
+	 * 
+	 * @param templateFileName Name of the template file without extension
+	 * @param text
+	 * @return
+	 */ 
+	public String getTemplate(String templateFileName, Long phoneNumber, String name, String email, String password) {
+		logger.trace("In::");
+		reqParamtersMap = new HashMap<>();
+  
+ 		reqParamtersMap.put("mobileNumber", phoneNumber); 
+ 		reqParamtersMap.put("email",  email);  
+ 		reqParamtersMap.put("name", name);  
+ 		reqParamtersMap.put("password", password);
+ 		reqParamtersMap.put("today_date", ""+new Date());
+ 		
+ 		
+		String output = this.templateEngine.process(templateFileName,
+				new Context(Locale.getDefault(), reqParamtersMap));
+
+		reqParamtersMap = null;
+
+		logger.trace("Out::");
+		return output;
+	}
+
 	public boolean triggerAlertEmail( Register register) {
 
 		boolean emailStatus = false;
@@ -234,6 +262,54 @@ public class RegisterService {
 		return emailStatus;
 
 	}
+	
+	
+	public boolean triggerForgotPasswordEmail(Long phoneNumber, String name, String email, String password) {
+
+		boolean emailStatus = false;
+
+		try {
+
+			logger.debug("In::triggerAlertEmail");
+
+			String  subject, ccMail, bccMail, message = null;
+			//email = register.getEmail();
+			 
+			subject = "Forget password help";
+			ccMail = null;
+			bccMail = null; 
+						 
+			message = this.getTemplate("forget-password-help", phoneNumber, name,  email,  password);
+
+			 
+			iPGMailer.sendEmail(email, subject, ccMail, bccMail, message);
+
+			logger.debug("EMIAL SENT ----------------------------------");
+			emailStatus = true;
+
+			logger.debug("Out::triggerAlertEmail");
+
+		} catch (MailException e) {
+			e.printStackTrace();
+			logger.error("Out:: "+e.getMessage());
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.error("Out:: "+e.getMessage());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.error("Out:: "+e.getMessage());
+		} catch (TemplateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.error("Out:: "+e.getMessage());
+		}
+
+		return emailStatus;
+
+	}
+
 
 	public boolean triggerSMS( Register register) {
 

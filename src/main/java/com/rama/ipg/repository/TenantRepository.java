@@ -29,5 +29,9 @@ public interface TenantRepository extends JpaRepository<Tenant, Long> {
 	
 	@Query(value="SELECT t FROM Tenant t WHERE t.supervisorId=?1") 
 	public List<Tenant> getTenantsBySupervisorId(Long supervisorId);
+	
+	
+	@Query(value="SELECT t FROM Tenant t WHERE t.phoneNumber=?1") 
+	public Tenant findByPhoneNumber(Long phoneNumber);
 	  
  }

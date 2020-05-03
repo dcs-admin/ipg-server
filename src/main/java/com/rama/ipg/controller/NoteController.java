@@ -2,6 +2,8 @@ package com.rama.ipg.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +13,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rama.ipg.model.Note;
 import com.rama.ipg.model.Note;
 import com.rama.ipg.repository.NoteRepository;
 
@@ -41,10 +45,23 @@ public class NoteController {
 		return note;
 	} 
 	
+	@PutMapping("/notes/{id}")
+	public Note updateNote(@PathVariable Long id, @Valid @RequestBody Note note) {
+		logger.info("In::"+id); 
+		
+		if(noteRepository.findById(id).isPresent()){
+			note.setId(id);
+			note = noteRepository.save(note);
+		} 
+		
+		logger.info("Out::"+note);
+		return note;
+	}
+	
 	
 	@DeleteMapping("/notes/{id}")
 	public ResponseEntity<?> deleteNote(@PathVariable Long id) {
-		logger.info("IN::deleteTenant::" + id);
+		logger.info("IN::deleteNote::" + id);
 
 		noteRepository.findById(id).ifPresent(note ->{ 
 			

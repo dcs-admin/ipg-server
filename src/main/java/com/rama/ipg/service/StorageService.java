@@ -48,9 +48,9 @@ public class StorageService {
 	 * @param id
 	 * @throws Exception
 	 */
-	public  void storeHostelImage(MultipartFile file, String cat, Long id) throws Exception {
+	public  void storeHostelImage(MultipartFile file, String cat, Long id, String picnum) throws Exception {
 		 
-		logger.info("In::storeHostelImages::"+file+"::"+id+"::"+cat); 
+		logger.info("In::storeHostelImages::"+file+"::"+id+"::"+cat+"::"+picnum); 
 		 
 		InputStream inputStream = null;
 		try {
@@ -64,7 +64,7 @@ public class StorageService {
 		targetDir = targetDir+File.separator+cat;
 		new File(targetDir).mkdir();
 		
-	    File targetFile = new File(targetDir+File.separator+file.getOriginalFilename());
+	    File targetFile = new File(targetDir+File.separator+picnum);
 	 
 	    java.nio.file.Files.copy( inputStream,  targetFile.toPath(),  StandardCopyOption.REPLACE_EXISTING);
 	   

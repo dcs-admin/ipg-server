@@ -24,9 +24,11 @@ import org.thymeleaf.context.Context;
 import com.rama.ipg.communication.IPGMailer;
 import com.rama.ipg.communication.IPGSmsGateway;
 import com.rama.ipg.constants.SMSTemplates;
+import com.rama.ipg.model.Expense;
 import com.rama.ipg.model.Payment;
 import com.rama.ipg.model.Register;
 import com.rama.ipg.model.Tenant;
+import com.rama.ipg.repository.ExpenseRepository;
 import com.rama.ipg.repository.PaymentRepository;
 import com.rama.ipg.repository.RegisterRepository;
 import com.rama.ipg.repository.TenantRepository;
@@ -62,6 +64,10 @@ public class PaymentService {
 
 	@Autowired
 	private PaymentRepository paymentRepository;
+	
+	
+	@Autowired
+	private ExpenseRepository expenseRepository;
 	   
 	
 	public void sendAlerts(Payment payment){ 
@@ -86,9 +92,12 @@ public class PaymentService {
 			
 			List<Payment> payments = paymentRepository.findLastPayments(register.getMobileNumber());
 			
-			logger.info("MN:"+register.getMobileNumber()+";payments: "+payments);
+			List<Expense> expenses = expenseRepository.findLastExpenses(register.getMobileNumber());
+			 
+			
+			//logger.info("MN:"+register.getMobileNumber()+";payments: "+payments);
 			//if(payments.size() > 0){
-				this.triggerPaymentsEmailToOwner(register, payments);	
+				this.triggerPaymentsEmailToOwner(register, payments, expenses);	
 			//}else{
 			//	logger.info("No Payment report found for owner: "+register.getMobileNumber());
 			//}
@@ -111,7 +120,7 @@ public class PaymentService {
 	  
 	
 
-	private boolean triggerPaymentsEmailToOwner(Register register, List<Payment> payments ) {
+	private boolean triggerPaymentsEmailToOwner(Register register, List<Payment> payments,  List<Expense> expenses ) {
 
 		boolean emailStatus = false;
 
@@ -121,11 +130,11 @@ public class PaymentService {
 
 			String email, subject, ccMail, bccMail, message = null; 
 			email = register.getEmail();
-			subject = register.getName().toUpperCase()+", Last Month Payments Statement";
+			subject = register.getName()+", Last Month Payments Statement";
 			ccMail = null;
 			bccMail = null; 
 						 
-			message = this.getTemplate("owner-monthly-payments-report", register, payments);
+			message = this.getTemplate("owner-monthly-payments-report", register, payments, expenses);
 
 			 
 			iPGMailer.sendEmail(email, subject, ccMail, bccMail, message);
@@ -166,7 +175,7 @@ public class PaymentService {
 			String email, subject, ccMail, bccMail, message = null;
 			email = tenant.getEmail();
 			 
-			subject = tenant.getName().toUpperCase()+", Gentle rent remainder of current month for "+tenant.getHostelName();
+			subject = tenant.getName()+", Gentle rent remainder of current month for "+tenant.getHostelName();
 			ccMail = null;
 			bccMail = null; 
 						 
@@ -355,23 +364,26 @@ public class PaymentService {
 	 * @param text
 	 * @return
 	 */ 
-	private String getTemplate(String templateFileName, Register register, List<Payment> payments) {
+	private String getTemplate(String templateFileName, Register register, List<Payment> payments,  List<Expense> expenses) {
 		logger.trace("In::");
 		reqParamtersMap = new HashMap<>(); 
 		
 		Date date = new Date(); 
 		String month = new SimpleDateFormat("MMMM").format(date); 
 		String year = new SimpleDateFormat("YYYY").format(date); 
-		Long sum = payments.stream().mapToLong(Payment::getAmount).sum();
+		Long psum = payments.stream().mapToLong(Payment::getAmount).sum();
+		Long esum = expenses.stream().mapToLong(Expense::getAmount).sum();
 		
 		reqParamtersMap.put("name", register.getName());
 		reqParamtersMap.put("mobileNumber", register.getMobileNumber());
 		reqParamtersMap.put("email",register.getEmail());
 		reqParamtersMap.put("month",month);
-		reqParamtersMap.put("amount",sum); 
+		reqParamtersMap.put("amount",psum); 
+		reqParamtersMap.put("expense_amount",esum); 
 		reqParamtersMap.put("year",year); 
 		
-		reqParamtersMap.put("payments",payments);  
+		reqParamtersMap.put("payments",payments); 
+		reqParamtersMap.put("expenses",expenses); 
 
 		/*reqParamtersMap.put("hostelId",payment.getBed().getHostelId());
 		reqParamtersMap.put("hostelName",payment.getBed().getHostelName());

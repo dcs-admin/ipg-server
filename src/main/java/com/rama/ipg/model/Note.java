@@ -24,17 +24,18 @@ public class Note implements Serializable {
  
 	@Id  
 	@GeneratedValue(strategy=GenerationType.AUTO) 
-	@Column private  String id;
+	@Column private  Long id;
 	
 	@Column private  String header;
 	@Column private  String content; 
 	@Column private  Date date;
 	@Column private  Long ownerId;
 	@Column private  String role;
-	public String getId() {
+	
+	public Long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getHeader() {

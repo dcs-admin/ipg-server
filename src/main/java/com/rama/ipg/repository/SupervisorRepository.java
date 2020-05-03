@@ -25,6 +25,8 @@ public interface SupervisorRepository extends JpaRepository<Supervisor, Long> {
 	@Query(value="SELECT t FROM Supervisor t WHERE t.ownerId=?1") 
 	public List<Supervisor> getSupervisorsForOwner(Long ownerId);
 	
+	@Query(value="SELECT s FROM Supervisor s WHERE s.phoneNumber=?1 ") 
+	public Supervisor findByPhoneNumber(Long phoneNumber); 
 	
 	
 	@Query(value="DELETE FROM Supervisor t WHERE t.phoneNumber=?1 ") 

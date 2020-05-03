@@ -39,7 +39,7 @@
           <td align="left" valign="middle" style="font-weight: bold; padding:20px 20px 20px 0px">
             <h3 style="margin:0 0 3px 0; color: #1abc9c;">
 			Payment Report for <span data-th-text="${month}"></span>,<span data-th-text="${year}"></span></h3>
-            <h1 style="margin:0;">&#8377;  <span data-th-text="${amount}"></span></h1>
+            
           </td>
         </tr>
       </table>
@@ -52,7 +52,9 @@
         <tr>
           <td align="left" valign="top" style="padding:0px 20px 20px;">
             <p style="margin:0; padding-top:20px; line-height: 1.2; border-top: 1px solid #eaebed;">
-             Payments including Pending and actual from system 
+             Payments including Pending and actual from system.
+			 <h3 style="margin:0;">Total Payments: &#8377;  <span data-th-text="${amount}"></span></h3>
+			 <h3 style="margin:0;">Total Expenses: &#8377;  <span data-th-text="${expense_amount}"></span></h3>
 			</p>
 			  
           </td>
@@ -69,7 +71,7 @@
           <td align="left" valign="top" colspan="2" style="padding-bottom: 10px;"><h3
               style="margin:0;">Total Payments</h3></td>
         </tr>
-		<tr data-th:each="payment : ${payments}">
+		<tr >
           <th align="center" valign="top"
               style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
          Name
@@ -141,6 +143,89 @@
     </td>
   </tr>
     
+	
+	
+	
+ <tr>
+    <td valign="top" style="padding: 30px 20px;">
+	
+      <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#fff"
+             style="border-collapse:collapse;">
+        <tr>
+          <td align="left" valign="top" colspan="2" style="padding-bottom: 10px;"><h3
+              style="margin:0;">Total Expenses</h3></td>
+        </tr>
+		<tr >
+          <th align="center" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+         Hostel
+		 </th>
+		  <th align="center" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+         Category
+		 </th>
+		 <th align="center" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+         Date
+		 </th>
+		 <th align="center" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+         Comments
+		 </th>
+		 <th align="center" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+         Amount
+		 </th>
+          
+        </tr>
+		 
+	   
+        <tr th:each="expense : ${expenses}">
+          <td align="left" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+         <span th:text="${expense.hostelName}"></span>
+          </td>
+		  <td align="left" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+         <span th:text="${expense.category}" ></span>
+          </td>
+		  <td align="left" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+         <span th:text="${expense.eDate}"></span>
+          </td>
+		  <td align="right" valign="top"
+              style="padding: 10px 5px 10px 0; border-bottom: 1px solid #eaebed; color: #808080;">
+          <span th:text="${expense.comments}"></span>
+          </td>
+          <td align="right" valign="top"
+              style="padding: 10px 0 10px 5px; border-bottom: 1px solid #eaebed; color: #404040; font-weight: bold;">
+            &#8377;<span th:text="${expense.amount}"></span>
+          </td>
+        </tr>
+		  
+		
+		
+			<tr>
+	  <td align="left" valign="top" colspan="5" style="padding-top: 15px;">
+		<table width="100%" bgcolor="#eaebed" cellpadding="0" cellspacing="0" border="0"
+			   style="padding: 20px 20px 15px 20px; border-radius: 4px;">
+		  <tr>
+			<td align="left" valign="top"  
+				style="color: #404040; font-weight: bold; padding-bottom: 5px;">Total Amount Spent
+			</td>
+
+			<td align="right" valign="top"
+				style="color: #404040; font-weight: bold; padding-bottom: 5px;">&#8377; <strong> <span data-th-text="${expense_amount}"></span></strong>
+			</td>
+		  </tr>
+		   
+		</table>
+	  </td>
+	</tr>
+         
+      </table>
+    </td>
+  </tr>
    
   
   <tr>

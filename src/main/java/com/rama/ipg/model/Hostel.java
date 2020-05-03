@@ -45,9 +45,20 @@ public  class Hostel implements Serializable {
 	private Facilities facilities;
 	
 	@Transient
+	private List<ContactInfo> contacts;
+	
+	@Transient
 	private List<Room> rooms;
 	 
 
+	
+	
+	public List<ContactInfo> getContacts() {
+		return contacts;
+	}
+	public void setContacts(List<ContactInfo> contacts) {
+		this.contacts = contacts;
+	}
 	public Long getSupervisorId() {
 		return supervisorId;
 	}
@@ -187,6 +198,8 @@ public  class Hostel implements Serializable {
 		builder.append(date);
 		builder.append(", updDate=");
 		builder.append(updDate);
+		builder.append(", contacts=");
+		builder.append(contacts);
 		builder.append("]");
 		return builder.toString();
 	}
