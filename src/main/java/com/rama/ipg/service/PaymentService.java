@@ -5,6 +5,8 @@ package com.rama.ipg.service;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -127,10 +129,13 @@ public class PaymentService {
 		try {
 
 			logger.debug("In::triggerPaymentsEmailToOwner");
+			YearMonth lastMonth    = YearMonth.now().minusMonths(1); 
+			DateTimeFormatter monthYearFormatter = DateTimeFormatter.ofPattern("MMMM yyyy");
+			
 
 			String email, subject, ccMail, bccMail, message = null; 
 			email = register.getEmail();
-			subject = register.getName()+", Last Month Payments Statement";
+			subject = register.getName()+", Account Statement for "+lastMonth.format(monthYearFormatter);
 			ccMail = null;
 			bccMail = null; 
 						 
@@ -368,19 +373,25 @@ public class PaymentService {
 		logger.trace("In::");
 		reqParamtersMap = new HashMap<>(); 
 		
-		Date date = new Date(); 
-		String month = new SimpleDateFormat("MMMM").format(date); 
-		String year = new SimpleDateFormat("YYYY").format(date); 
+		//Date date = new Date(); 
+		YearMonth lastMonth    = YearMonth.now().minusMonths(1); 
+		DateTimeFormatter monthYearFormatter = DateTimeFormatter.ofPattern("MMMM yyyy");
+
+		//System.out.printf("Today: %s\n", thisMonth.format(monthYearFormatter));
+		//System.out.printf("Last Month: %s\n", lastMonth.format(monthYearFormatter)); 
+		
+		//String month = new SimpleDateFormat("MMMM").format(date); 
+		//String year = new SimpleDateFormat("YYYY").format(date); 
 		Long psum = payments.stream().mapToLong(Payment::getAmount).sum();
 		Long esum = expenses.stream().mapToLong(Expense::getAmount).sum();
 		
 		reqParamtersMap.put("name", register.getName());
 		reqParamtersMap.put("mobileNumber", register.getMobileNumber());
 		reqParamtersMap.put("email",register.getEmail());
-		reqParamtersMap.put("month",month);
+		reqParamtersMap.put("month",lastMonth.format(monthYearFormatter));
 		reqParamtersMap.put("amount",psum); 
 		reqParamtersMap.put("expense_amount",esum); 
-		reqParamtersMap.put("year",year); 
+		//reqParamtersMap.put("year",year); 
 		
 		reqParamtersMap.put("payments",payments); 
 		reqParamtersMap.put("expenses",expenses); 
